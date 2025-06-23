@@ -2,21 +2,20 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const path = require('path');
 
 app.use(express.json()); // To handle JSON requests
 app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.static(__dirname)); // Serve static files (index.html, script.js)
 
-
+// In-memory storage for capsules
 let capsules = [];
 
-// Route: front-end
+// Route: Serve the front-end
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Route:  new capsule
+// Route: Create a new capsule
 app.post('/api/capsules', (req, res) => {
     const { title, contents, dateToOpen } = req.body;
 
