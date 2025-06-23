@@ -1,16 +1,18 @@
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
 
 app.use(express.json()); // To handle JSON requests
 app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(express.static(__dirname)); // Serve static files (index.html, script.js)
 
 // In-memory storage for capsules
 let capsules = [];
 
-// Route: Welcome message
+// Route: Serve the front-end
 app.get('/', (req, res) => {
-    res.send("Welcome to the Time Capsule API! Use /api/capsules to manage your time capsules.");
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Route: Create a new capsule
